@@ -372,6 +372,43 @@ body{
  .summary-box{padding:9px}.summary-box b{font-size:15px}
 }
 
+
+/* ===== FULL PACKAGE CONTENT LAYER ===== */
+.lesson-viewer{max-width:1000px;margin:auto}
+.lesson-content{line-height:1.65}
+.lesson-content h3{font-size:17px;margin:20px 0 8px}
+.lesson-content h4{font-size:13px;margin:15px 0 6px}
+.lesson-content p,.lesson-content li{font-size:11px;color:var(--muted)}
+.lesson-content ul{padding-left:20px}
+.concept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
+.concept{padding:12px;border:1px solid var(--line);border-radius:12px;background:#071a2b}
+.concept b{display:block;font-size:11px;margin-bottom:4px}
+.concept span{font-size:9px;color:var(--muted)}
+.lesson-nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.answer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.answer-btn{padding:11px;border:1px solid var(--line);background:#071a2b;color:#dcecff;border-radius:10px;text-align:left;cursor:pointer}
+.answer-btn:hover{border-color:#3d82ad;background:#0b2842}
+.answer-btn.correct{border-color:#36d79b;background:#0b352c}
+.answer-btn.wrong{border-color:#ff6379;background:#3a1620}
+.tool-result{margin-top:12px}
+.calculator-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-control{width:100%;box-sizing:border-box;background:#061523;border:1px solid var(--line);border-radius:10px;color:#fff;padding:10px;outline:0}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.kpi{padding:12px;background:#071a2b;border:1px solid var(--line);border-radius:11px}
+.kpi b{font-size:15px;display:block}.kpi small{font-size:8px;color:var(--muted)}
+.flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:15px 0}
+.flow-node{padding:12px 14px;border:1px solid #2a5d80;background:#0b253c;border-radius:12px;text-align:center}
+.flow-node b{font-size:11px}.flow-node small{display:block;color:var(--muted);font-size:8px;margin-top:3px}
+.flow-arrow{color:#58d7ff;font-weight:900}
+.scenario{padding:13px;border:1px dashed #315b78;border-radius:12px;background:#071a2b;margin:10px 0}
+.scenario b{font-size:11px}.scenario p{font-size:10px;color:var(--muted);margin:5px 0}
+@media(max-width:720px){
+ .concept-grid,.calculator-grid{grid-template-columns:1fr 1fr}
+ .kpi-grid{grid-template-columns:1fr 1fr}
+ .answer-grid{grid-template-columns:1fr}
+ .lesson-nav{display:grid;grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body>
@@ -511,6 +548,10 @@ body{
   <div class="card" id="toolPanel" style="margin-top:15px"></div>
 </section>
 
+<section id="lessonViewer" class="page">
+ <div class="card page-hero"><div><div class="eyebrow">LESSON</div><h2 id="lessonViewerTitle">Lesson</h2><p class="muted">Learn → Practice → Check → Complete</p></div><div class="hero-mark">📖</div></div>
+ <div id="lessonViewerBody" class="lesson-viewer"></div>
+</section>
 <section id="labHub" class="page">
   <div class="card page-hero">
     <div><div class="eyebrow">HANDS-ON LABS</div><h2>🔬 Lab Hub</h2>
@@ -689,7 +730,7 @@ const quizData=[
 ["Layer 3 OSI ialah?","Network",["Physical","Data Link","Network","Transport"],2],
 ["169.254.x.x biasanya menunjukkan?","APIPA / DHCP gagal",["DNS berjaya","VLAN trunk aktif","Internet laju","Static route"],0]
 ];
-const pageTitles={home:"Home",labHub:"Lab Hub",learn:"Learn",lessonView:"Lesson",tools:"Network Tools",simulator:"Packet Simulator",vlanSimulator:"VLAN Simulator",subnetLab:"Subnetting Lab",dhcpLab:"DHCP Simulator",dnsLab:"DNS Simulator",osiLab:"OSI Model Lab",troubleLab:"Troubleshooting Lab",miniLab:"Mini Network Lab",quiz:"Quiz",achievements:"Achievements"};
+const pageTitles={home:"Home",lessonViewer:"Lesson",labHub:"Lab Hub",learn:"Learn",lessonView:"Lesson",tools:"Network Tools",simulator:"Packet Simulator",vlanSimulator:"VLAN Simulator",subnetLab:"Subnetting Lab",dhcpLab:"DHCP Simulator",dnsLab:"DNS Simulator",osiLab:"OSI Model Lab",troubleLab:"Troubleshooting Lab",miniLab:"Mini Network Lab",quiz:"Quiz",achievements:"Achievements"};
 
 function showPage(id){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
@@ -726,7 +767,7 @@ function openLesson(i){
  "Troubleshooting yang baik bermula dengan simptom, kumpul evidence, test hypothesis dan ubah satu perkara pada satu masa."
  ];
  document.getElementById("lessonContent").innerHTML=`<div class="eyebrow">${l[2].toUpperCase()}</div><h2>${l[3]} ${l[0]}</h2><p class="muted">${bodies[i]}</p><div class="result"><b>Key point:</b> Fahami konsep dahulu, kemudian gunakan simulator untuk lihat behaviour sebenar.</div><div class="actions" style="margin-top:15px"><button class="btn" onclick="showPage('learn')">← Back to Learn</button>${i<11?`<button class="btn secondary" onclick="openLesson(${i+1})">Next Lesson →</button>`:""}</div>`;
- showPage("lessonView"); renderLessons(); updateHome();
+ showPage("lessonView"); renderFullLessonCards(); updateHome();
 }
 
 function ipToInt(ip){const p=ip.trim().split(".");if(p.length!==4||p.some(x=>x===""||!/^\d+$/.test(x)||+x<0||+x>255))return null;return ((+p[0]<<24)>>>0)+(+p[1]<<16)+(+p[2]<<8)+(+p[3]);}
@@ -893,6 +934,94 @@ function updateHome(){
   const op=document.getElementById("overallProgress");if(op)op.style.width=Math.min(100,Math.round((done+labsDone)/20*100))+"%";
   const qs=document.getElementById("quizBestSide");if(qs)qs.textContent=best;
   renderAchievements();
+}
+
+
+const FULL_LESSONS=[["What is Networking?", "Learn what a computer network is and why devices communicate.", "Beginner", "🌐", "A network connects devices so they can exchange data and share services.", ["Understand the purpose of a network", "Recognise common network types", "Identify endpoints and infrastructure devices"], [["LAN", "Local Area Network"], ["WAN", "Wide Area Network"], ["Protocol", "Rules used for communication"]]], ["Network Devices", "Identify switches, routers, access points and end devices.", "Beginner", "🖥️", "Different devices perform different roles. A switch primarily connects devices inside a LAN, while a router connects different IP networks.", ["Identify a switch", "Identify a router", "Understand the role of an access point"], [["Switch", "Connects devices in a LAN"], ["Router", "Connects IP networks"], ["AP", "Provides wireless access"]]], ["OSI Model", "Understand the seven layers and why layered networking helps troubleshooting.", "Beginner", "🧩", "The OSI model is a conceptual framework that separates network communication into seven layers.", ["Name the seven layers", "Relate protocols to layers", "Use layers when troubleshooting"], [["L1", "Physical"], ["L2", "Data Link"], ["L3", "Network"]]], ["Ethernet & MAC", "Learn frames, MAC addresses and basic switching.", "Beginner", "📦", "Ethernet operates at the data-link layer. Switches use MAC addresses to forward frames within a LAN.", ["Understand a MAC address", "Understand an Ethernet frame", "Explain basic switching"], [["MAC", "Layer 2 hardware address"], ["Frame", "Layer 2 data unit"], ["Switch", "Forwards frames"]]], ["IPv4 Addressing", "Understand IPv4 addresses, subnet masks and default gateways.", "Intermediate", "🌐", "An IPv4 address identifies an interface on an IP network. The subnet mask separates the network portion from the host portion.", ["Read an IPv4 address", "Understand subnet masks", "Explain a default gateway"], [["IPv4", "32-bit address"], ["Mask", "Separates network/host"], ["Gateway", "Path to other networks"]]], ["Subnetting", "Calculate Network ID, Broadcast, host range and usable hosts.", "Intermediate", "🧮", "Subnetting divides an IP network into smaller networks. CIDR notation expresses the number of network bits.", ["Read CIDR notation", "Calculate network and broadcast", "Calculate usable hosts"], [["/24", "256 addresses / 254 usable"], ["/26", "64 addresses / 62 usable"], ["Broadcast", "Last address of subnet"]]], ["VLAN", "Understand VLAN separation and inter-VLAN routing.", "Intermediate", "🔀", "A VLAN creates a logical Layer 2 broadcast domain. Devices in different VLANs require Layer 3 routing to communicate.", ["Explain VLAN purpose", "Understand access ports", "Understand inter-VLAN routing"], [["VLAN 10", "Logical broadcast domain"], ["Access", "Carries one VLAN"], ["Routing", "Connects IP networks"]]], ["DHCP", "Understand the DHCP DORA process.", "Intermediate", "📡", "DHCP dynamically provides network configuration such as an IP address, subnet mask, gateway and DNS server.", ["Explain Discover", "Explain Offer", "Explain Request and ACK"], [["Discover", "Client broadcasts"], ["Offer", "Server proposes config"], ["ACK", "Lease is confirmed"]]], ["DNS", "Understand how names are resolved to IP addresses.", "Intermediate", "🌐", "DNS maps human-readable names to IP addresses so clients can locate services without memorising numeric addresses.", ["Explain a DNS query", "Understand name-to-IP resolution", "Recognise DNS as a service"], [["Query", "Client asks for a name"], ["Response", "DNS returns data"], ["A Record", "Hostname to IPv4"]]], ["Routing", "Understand how routers choose paths between networks.", "Advanced", "🛣️", "Routing forwards packets between different IP networks. A router uses its routing information to select a next hop or interface.", ["Understand routing tables", "Explain default routes", "Understand next-hop forwarding"], [["Route", "Path to a network"], ["Next Hop", "Where packet goes next"], ["Default", "Fallback route"]]], ["Troubleshooting", "Apply a systematic approach to network problems.", "Advanced", "🛠️", "Good troubleshooting starts with simple checks and moves through the stack systematically.", ["Check Layer 1", "Verify IP configuration", "Test gateway and DNS"], [["L1", "Link / cable / Wi-Fi"], ["IP", "Address / mask / gateway"], ["DNS", "Name resolution"]]], ["Network Design", "Combine addressing, VLANs, DHCP, routing and troubleshooting concepts.", "Advanced", "🏗️", "Network design combines requirements, topology, addressing, segmentation, security and operational considerations.", ["Plan IP addressing", "Plan VLANs", "Validate connectivity and operations"], [["Topology", "How devices connect"], ["Segmentation", "Separate traffic"], ["Operations", "Monitor and maintain"]]]];
+
+function lessonCardHTML(i,l){
+ const done=localStorage.getItem("lesson_"+i)==="1";
+ return `<div class="card lesson-v2"><div><div class="lesson-top"><div class="lesson-number">${String(i+1).padStart(2,"0")}</div><span class="badge">${l[2]}</span></div><h3>${l[3]} ${l[0]}</h3><p class="muted">${l[1]}</p></div><div class="lesson-footer"><span class="lesson-status">${done?"✓ Completed":"Not started"}</span><button class="btn ${done?"success":"secondary"}" onclick="openFullLesson(${i})">${done?"Review":"Start →"}</button></div></div>`;
+}
+function renderFullLessonCards(){
+ const grid=document.getElementById("lessonGrid"); if(!grid)return;
+ const q=(document.getElementById("lessonSearch")?.value||"").toLowerCase();
+ grid.innerHTML=FULL_LESSONS.map((l,i)=>({l,i})).filter(x=>(activeLessonFilter==="All"||x.l[2]===activeLessonFilter)&&(!q||x.l[0].toLowerCase().includes(q)||x.l[1].toLowerCase().includes(q))).map(x=>lessonCardHTML(x.i,x.l)).join("");
+}
+function openFullLesson(i){
+ const l=FULL_LESSONS[i];
+ const page=document.getElementById("lessonViewer"); if(!page)return;
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ page.classList.add("active");
+ const title=document.getElementById("lessonViewerTitle");
+ if(title)title.textContent=`Lesson ${String(i+1).padStart(2,"0")} — ${l[0]}`;
+ document.getElementById("lessonViewerBody").innerHTML=`
+ <div class="card lesson-content">
+   <div class="badge">${l[2]} • ${i+1}/12</div>
+   <h3>🎯 Learning Objectives</h3>
+   <ul>${l[5].map(x=>`<li>${x}</li>`).join("")}</ul>
+   <h3>📖 Concept</h3><p>${l[4]}</p>
+   <div class="concept-grid">${l[6].map(x=>`<div class="concept"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div>
+   <h3>🧪 Practice</h3>
+   <div class="scenario"><b>Challenge</b><p>Gunakan konsep lesson ini dalam simulator yang berkaitan, kemudian kembali untuk quick check.</p></div>
+   <button class="btn" onclick="lessonPractice(${i})">Open Related Practice →</button>
+   <h3>📝 Quick Check</h3>
+   <p>Which statement best matches this lesson?</p>
+   <div class="answer-grid">${["It is a networking concept you should understand and apply.","It is only useful for programming.","It is unrelated to troubleshooting.","It should never be tested in a lab."].map((x,j)=>`<button class="answer-btn" onclick="lessonCheck(this,${j===0})">${x}</button>`).join("")}</div>
+   <div id="lessonCheckResult" class="result" style="display:none"></div>
+   <div class="lesson-nav">
+     <button class="btn secondary" onclick="showPage('learn')">← Back to Learn</button>
+     <button class="btn" onclick="completeFullLesson(${i})">✓ Complete Lesson</button>
+   </div>
+ </div>`;
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function lessonCheck(btn,correct){
+ document.querySelectorAll(".answer-btn").forEach(x=>x.disabled=true);
+ btn.classList.add(correct?"correct":"wrong");
+ const r=document.getElementById("lessonCheckResult");r.style.display="block";
+ r.innerHTML=correct?"✅ Correct. Concept understood.":"❌ Not quite. Review the concept above and try the related lab.";
+}
+function completeFullLesson(i){
+ localStorage.setItem("lesson_"+i,"1");
+ updateHome();renderFullLessonCards();
+ const r=document.getElementById("lessonCheckResult");if(r){r.style.display="block";r.innerHTML="🎉 Lesson completed and progress saved!";}
+}
+function lessonPractice(i){
+ const map=[null,null,"osiLab",null,"subnetLab","subnetLab","vlanSimulator","dhcpLab","dnsLab","troubleLab","troubleLab","miniLab"];
+ const target=map[i];
+ if(target)showPage(target);else showPage("labHub");
+}
+function openTool(type){
+ const p=document.getElementById("toolPanel");if(!p)return;
+ if(type==="subnet"){
+   p.innerHTML=`<h3>🧮 Subnet Calculator</h3><p class="muted">Enter an IPv4 network and prefix.</p>
+   <div class="calculator-grid"><input id="subnetIp" class="form-control" value="192.168.10.0"><input id="subnetPrefix" class="form-control" type="number" min="0" max="32" value="24"></div>
+   <button class="btn" style="margin-top:9px" onclick="calculateSubnet()">Calculate →</button><div id="subnetResult" class="tool-result"></div>`;
+ }else if(type==="cidr"){
+   p.innerHTML=`<h3>📐 CIDR Quick Reference</h3><div class="kpi-grid">${[[24,256,254],[25,128,126],[26,64,62],[27,32,30],[28,16,14],[29,8,6],[30,4,2],[31,2,0]].map(x=>`<div class="kpi"><b>/${x[0]}</b><small>${x[1]} addresses • ${x[2]} usable</small></div>`).join("")}</div>`;
+ }else if(type==="wifi"){
+   p.innerHTML=`<h3>📶 Wi-Fi Channel Helper</h3><div class="scenario"><b>2.4 GHz</b><p>Use non-overlapping planning where applicable; common guidance focuses on channels 1, 6 and 11.</p></div><div class="scenario"><b>5 GHz</b><p>Channel availability depends on local regulations, AP capabilities and DFS requirements.</p></div>`;
+ }else{
+   p.innerHTML=`<h3>🔀 VLAN Quick Tool</h3><div class="flow"><div class="flow-node"><b>PC</b><small>Access port</small></div><div class="flow-arrow">→</div><div class="flow-node"><b>Switch</b><small>VLAN 10</small></div><div class="flow-arrow">→</div><div class="flow-node"><b>Router/L3</b><small>Inter-VLAN</small></div></div><p class="muted">Access ports normally place an endpoint into one VLAN; routing is required between different IP networks.</p>`;
+ }
+}
+function calculateSubnet(){
+ const ip=(document.getElementById("subnetIp")?.value||"").trim(), p=parseInt(document.getElementById("subnetPrefix")?.value);
+ const out=document.getElementById("subnetResult");
+ const parts=ip.split(".").map(Number);
+ if(parts.length!==4||parts.some(x=>!Number.isInteger(x)||x<0||x>255)||!Number.isInteger(p)||p<0||p>32){out.innerHTML='<div class="result">❌ Enter a valid IPv4 address and prefix.</div>';return;}
+ const ipn=parts.reduce((a,x)=>(a*256+x)>>>0,0);
+ const mask=p===0?0:(0xffffffff<<(32-p))>>>0;
+ const net=(ipn&mask)>>>0, broadcast=(net|(~mask))>>>0;
+ const toIp=n=>[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join(".");
+ const hosts=p<=30?Math.pow(2,32-p)-2:(p===31?0:1);
+ out.innerHTML=`<div class="kpi-grid"><div class="kpi"><b>${toIp(net)}</b><small>Network ID</small></div><div class="kpi"><b>${toIp(broadcast)}</b><small>Broadcast</small></div><div class="kpi"><b>${hosts}</b><small>Usable Hosts</small></div><div class="kpi"><b>/${p}</b><small>CIDR</small></div></div>`;
+}
+function openFullQuiz(){
+ showPage("quiz");
+ const a=document.getElementById("quizArea");
+ if(a && !a.innerHTML.trim()) renderQuiz();
 }
 
 function init(){
