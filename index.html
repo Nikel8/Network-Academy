@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071426">
-<meta name="description" content="Network Academy — free interactive networking learning lab">
+<meta name="description" content="Network Academy — free interactive networking learning platform">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon.svg">
-<title>Network Academy — V12</title>
+<title>Network Academy — Complete</title>
 <style>
 :root{
  --bg:#040c17;--panel:#091a2d;--panel2:#0e2540;--line:#214363;--text:#eef7ff;--muted:#91a8c2;
@@ -247,6 +247,131 @@ body{
   .path-card{min-height:112px;padding:12px}
 }
 
+
+/* =========================================================
+   NETWORK ACADEMY — COMPLETE UI OVERHAUL
+   Learn • Tools • Labs • Quiz • Badges
+   ========================================================= */
+.app-shell-label{font-size:10px;color:var(--muted);letter-spacing:.7px}
+.page-hero{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:18px;
+  padding:22px;margin-bottom:15px;
+  background:linear-gradient(135deg,#0d2d4c,#071827 72%);
+}
+.page-hero h2{font-size:25px;letter-spacing:-.6px;margin:0 0 5px}
+.page-hero p{margin:0;max-width:650px}
+.page-hero .hero-mark{
+  width:58px;height:58px;border-radius:17px;display:grid;place-items:center;
+  background:#123654;border:1px solid #2b6289;font-size:28px;flex:0 0 auto
+}
+.section-title{
+  display:flex;justify-content:space-between;align-items:end;gap:10px;
+  margin:20px 2px 10px
+}
+.section-title h3{margin:0;font-size:16px}
+.section-title p{margin:3px 0 0;color:var(--muted);font-size:10px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{
+  border:1px solid var(--line);background:#0a2138;color:#a9c8df;
+  border-radius:999px;padding:7px 10px;font-size:9px;font-weight:900;cursor:pointer
+}
+.chip.active,.chip:hover{border-color:#3c7ca7;background:#123555;color:#fff}
+.search-box{
+  display:flex;align-items:center;gap:9px;background:#061523;border:1px solid var(--line);
+  border-radius:12px;padding:0 12px
+}
+.search-box input{
+  flex:1;background:transparent;border:0;outline:0;color:#fff;padding:12px 0
+}
+.lesson-grid-v2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lesson-v2{
+  min-height:190px;display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden
+}
+.lesson-v2:after{
+  content:"";position:absolute;right:-28px;top:-28px;width:92px;height:92px;
+  border-radius:50%;background:#35c8ff10
+}
+.lesson-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.lesson-number{
+  width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  background:#102d49;border:1px solid #285878;font-size:11px;font-weight:900;color:#8edfff
+}
+.level-beginner{color:#55e0a8}.level-intermediate{color:#ffd35a}.level-advanced{color:#ff788c}
+.lesson-v2 h3{font-size:14px;margin:10px 0 5px}
+.lesson-v2 p{font-size:10px;margin:0;line-height:1.55}
+.lesson-footer{margin-top:15px;display:flex;justify-content:space-between;align-items:center;gap:7px}
+.lesson-status{font-size:9px;color:var(--muted)}
+.lesson-v2 .btn{font-size:10px;padding:8px 10px}
+.tool-grid-v2{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tool-v2{min-height:165px;cursor:pointer;transition:.18s;position:relative;overflow:hidden}
+.tool-v2:hover{transform:translateY(-2px);border-color:#3a769f}
+.tool-v2 .tool-big{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+  background:#102d49;border:1px solid #285878;font-size:23px;margin-bottom:12px
+}
+.tool-v2 h3{font-size:13px}
+.tool-v2 p{font-size:10px}
+.tool-v2 .open-label{font-size:9px;color:var(--cyan);font-weight:900;margin-top:12px}
+.lab-grid-v2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lab-v2{
+  min-height:175px;display:flex;flex-direction:column;justify-content:space-between;
+  cursor:pointer;transition:.18s;position:relative;overflow:hidden
+}
+.lab-v2:hover{transform:translateY(-2px);border-color:#3a769f}
+.lab-v2 .lab-big{
+  width:48px;height:48px;border-radius:14px;display:grid;place-items:center;
+  background:#102d49;border:1px solid #285878;font-size:24px
+}
+.lab-v2 h3{font-size:14px;margin:11px 0 4px}
+.lab-v2 p{font-size:10px;margin:0}
+.lab-v2 .lab-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:13px}
+.lab-state{font-size:9px;color:var(--muted)}
+.badge-grid-v2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.badge-v2{min-height:150px;display:flex;gap:12px;align-items:center}
+.badge-v2 .medal{
+  width:56px;height:56px;border-radius:17px;display:grid;place-items:center;
+  background:#102d49;border:1px solid #285878;font-size:27px;flex:0 0 auto
+}
+.badge-v2.locked{opacity:.42}
+.badge-v2 h3{font-size:13px;margin:0 0 4px}
+.badge-v2 p{font-size:10px;margin:0 0 8px}
+.quiz-shell{display:grid;grid-template-columns:230px 1fr;gap:14px}
+.quiz-menu{align-self:start;position:sticky;top:15px}
+.quiz-menu .quiz-stat{
+  padding:14px;background:#071a2c;border:1px solid var(--line);border-radius:13px;margin-bottom:8px
+}
+.quiz-stat b{font-size:20px}
+.quiz-stat small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.quiz-main{min-width:0}
+.quiz-header{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:12px
+}
+.quiz-progress{height:6px;background:#071321;border-radius:99px;overflow:hidden;margin-top:8px}
+.quiz-progress i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));width:0}
+.achievement-summary{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px
+}
+.summary-box{padding:12px;border:1px solid var(--line);border-radius:12px;background:#071a2c}
+.summary-box b{font-size:19px}.summary-box small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+@media(max-width:1050px){
+ .lesson-grid-v2{grid-template-columns:1fr 1fr}.tool-grid-v2{grid-template-columns:1fr 1fr}
+ .lab-grid-v2{grid-template-columns:1fr 1fr}.badge-grid-v2{grid-template-columns:1fr 1fr}
+ .quiz-shell{grid-template-columns:1fr}.quiz-menu{position:static}
+}
+@media(max-width:720px){
+ .page-hero{padding:17px}.page-hero h2{font-size:21px}.page-hero .hero-mark{width:48px;height:48px;font-size:22px}
+ .lesson-grid-v2,.tool-grid-v2,.lab-grid-v2,.badge-grid-v2{grid-template-columns:1fr 1fr;gap:8px}
+ .lesson-v2,.tool-v2,.lab-v2,.badge-v2{min-height:145px;padding:13px}
+ .lesson-v2 p,.tool-v2 p,.lab-v2 p,.badge-v2 p{font-size:9px}
+ .lesson-v2 h3,.lab-v2 h3,.badge-v2 h3{font-size:12px}
+ .tool-v2 .tool-big,.lab-v2 .lab-big{width:40px;height:40px;font-size:20px}
+ .badge-v2 .medal{width:43px;height:43px;font-size:21px}
+ .achievement-summary{grid-template-columns:1fr 1fr 1fr;gap:6px}
+ .summary-box{padding:9px}.summary-box b{font-size:15px}
+}
+
 </style>
 </head>
 <body>
@@ -257,7 +382,7 @@ body{
     <button class="active" data-page="home">🏠 Home</button>
     <button data-page="learn">📚 Learn</button>
     <button data-page="tools">🧮 Network Tools</button>
-    <button data-page="simulator">🔬 Packet Simulator</button>
+    <button data-page="labHub">🔬 Lab Hub</button><button data-page="simulator">🔬 Packet Simulator</button>
     <button data-page="vlanSimulator">🔀 VLAN Simulator</button>
     <button data-page="subnetLab">🧮 Subnetting Lab</button>
     <button data-page="dhcpLab">📡 DHCP Simulator</button>
@@ -351,23 +476,59 @@ body{
 </section>
 
 <section id="learn" class="page">
-  <div class="card"><div class="eyebrow">LEARNING PATH</div><h2>📚 Networking Fundamentals</h2><p class="muted">12 lesson ringkas untuk bina foundation networking.</p></div>
-  <div class="grid grid3" style="margin-top:15px" id="lessonGrid"></div>
+  <div class="card page-hero">
+    <div><div class="eyebrow">LEARNING PATH</div><h2>📚 Learn Networking</h2>
+      <p class="muted">Ikut laluan dari asas networking sampai troubleshooting. Buka lesson, faham konsep dan terus practice di lab.</p></div>
+    <div class="hero-mark">📚</div>
+  </div>
+  <div class="card">
+    <div class="search-box">🔎<input id="lessonSearch" placeholder="Search lessons..." oninput="filterLessons(this.value)"></div>
+    <div class="section-title"><div><h3>Learning Path</h3><p>12 lessons • Beginner → Intermediate → Advanced</p></div></div>
+    <div class="chips" id="lessonFilters">
+      <button class="chip active" onclick="setLessonFilter('All',this)">All</button>
+      <button class="chip" onclick="setLessonFilter('Beginner',this)">🟢 Beginner</button>
+      <button class="chip" onclick="setLessonFilter('Intermediate',this)">🟡 Intermediate</button>
+      <button class="chip" onclick="setLessonFilter('Advanced',this)">🔴 Advanced</button>
+    </div>
+  </div>
+  <div class="lesson-grid-v2" style="margin-top:12px" id="lessonGrid"></div>
 </section>
 
 <section id="lessonView" class="page"><div class="card" id="lessonContent"></div></section>
 
 <section id="tools" class="page">
-  <div class="card"><div class="eyebrow">QUICK TOOLS</div><h2>🧮 Network Tools</h2><p class="muted">Tools asas yang boleh digunakan semasa belajar atau troubleshooting.</p></div>
-  <div class="grid grid3" style="margin-top:15px">
-    <div class="card tool-card" onclick="openTool('subnet')"><div class="tool-icon">🧮</div><h3>Subnet Calculator</h3><p class="muted">Kira network, broadcast dan host range.</p></div>
-    <div class="card tool-card" onclick="openTool('cidr')"><div class="tool-icon">📐</div><h3>CIDR Quick Reference</h3><p class="muted">Prefix, mask dan usable host reference.</p></div>
-    <div class="card tool-card" onclick="openTool('wifi')"><div class="tool-icon">📶</div><h3>Wi-Fi Channel Helper</h3><p class="muted">Cadangan channel untuk 2.4 GHz dan 5 GHz.</p></div>
-    <div class="card tool-card" onclick="openTool('vlan')"><div class="tool-icon">🔀</div><h3>VLAN Quick Tool</h3><p class="muted">Fahami access, trunk dan VLAN ID.</p></div>
+  <div class="card page-hero">
+    <div><div class="eyebrow">NETWORK TOOLBOX</div><h2>🧮 Network Tools</h2>
+      <p class="muted">Quick reference dan calculator untuk belajar, design dan troubleshooting network.</p></div>
+    <div class="hero-mark">🧮</div>
+  </div>
+  <div class="tool-grid-v2">
+    <div class="card tool-v2" onclick="openTool('subnet')"><div class="tool-big">🧮</div><h3>Subnet Calculator</h3><p class="muted">Network, broadcast, host range & usable hosts.</p><div class="open-label">OPEN TOOL →</div></div>
+    <div class="card tool-v2" onclick="openTool('cidr')"><div class="tool-big">📐</div><h3>CIDR Reference</h3><p class="muted">Prefix, subnet mask dan host capacity.</p><div class="open-label">OPEN REFERENCE →</div></div>
+    <div class="card tool-v2" onclick="openTool('wifi')"><div class="tool-big">📶</div><h3>Wi-Fi Helper</h3><p class="muted">Channel guidance untuk 2.4 GHz dan 5 GHz.</p><div class="open-label">OPEN TOOL →</div></div>
+    <div class="card tool-v2" onclick="openTool('vlan')"><div class="tool-big">🔀</div><h3>VLAN Quick Tool</h3><p class="muted">Access, trunk, VLAN ID dan basic concepts.</p><div class="open-label">OPEN TOOL →</div></div>
   </div>
   <div class="card" id="toolPanel" style="margin-top:15px"></div>
 </section>
 
+<section id="labHub" class="page">
+  <div class="card page-hero">
+    <div><div class="eyebrow">HANDS-ON LABS</div><h2>🔬 Lab Hub</h2>
+      <p class="muted">Belajar dengan simulation. Setiap lab fokus pada satu networking concept dan simpan progress anda.</p></div>
+    <div class="hero-mark">🔬</div>
+  </div>
+  <div class="lab-grid-v2">
+    <div class="card lab-v2" onclick="showPage('simulator')"><div><div class="lab-big">📦</div><h3>Packet Simulator</h3><p class="muted">Ikuti packet dari PC → Switch → Router → Server.</p></div><div class="lab-bottom"><span class="lab-state">Layer 2 / 3</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('vlanSimulator')"><div><div class="lab-big">🔀</div><h3>VLAN Simulator</h3><p class="muted">Lihat kenapa VLAN berbeza perlukan routing.</p></div><div class="lab-bottom"><span class="lab-state">VLAN 10 / 20</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('subnetLab')"><div><div class="lab-big">🧮</div><h3>Subnetting Lab</h3><p class="muted">Kira network ID, broadcast dan usable hosts.</p></div><div class="lab-bottom"><span class="lab-state">IPv4 / CIDR</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('dhcpLab')"><div><div class="lab-big">📡</div><h3>DHCP Simulator</h3><p class="muted">Discover → Offer → Request → ACK.</p></div><div class="lab-bottom"><span class="lab-state">DORA</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('dnsLab')"><div><div class="lab-big">🌐</div><h3>DNS Simulator</h3><p class="muted">Lihat proses hostname resolution kepada IP.</p></div><div class="lab-bottom"><span class="lab-state">DNS Query</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('osiLab')"><div><div class="lab-big">🧩</div><h3>OSI Model Lab</h3><p class="muted">Explore 7 layer, protocol dan network devices.</p></div><div class="lab-bottom"><span class="lab-state">7 Layers</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('troubleLab')"><div><div class="lab-big">🛠️</div><h3>Troubleshooting Lab</h3><p class="muted">Diagnose issue secara sistematik dari Layer 1.</p></div><div class="lab-bottom"><span class="lab-state">Diagnose</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('miniLab')"><div><div class="lab-big">🏗️</div><h3>Mini Network Lab</h3><p class="muted">Gabungkan IP, VLAN, gateway, DHCP dan routing.</p></div><div class="lab-bottom"><span class="lab-state">Challenge</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('quiz')"><div><div class="lab-big">📝</div><h3>Lab Knowledge Check</h3><p class="muted">Uji kefahaman selepas practice.</p></div><div class="lab-bottom"><span class="lab-state">10 Questions</span><span class="badge">TAKE QUIZ →</span></div></div>
+  </div>
+</section>
 <section id="simulator" class="page">
  <div class="card"><div class="eyebrow">V3</div><h2>🔬 Packet Flow Simulator</h2><p class="muted">Lihat perjalanan packet dari PC → Switch → Router → Server.</p>
   <div class="diagram" id="packetDiagram">
@@ -462,17 +623,43 @@ body{
 </section>
 
 <section id="quiz" class="page">
- <div class="card"><div class="eyebrow">KNOWLEDGE CHECK</div><h2>📝 Networking Quiz</h2><p class="muted">10 soalan campuran. Score terbaik disimpan dalam browser.</p><div id="quizArea"></div></div>
+  <div class="card page-hero">
+    <div><div class="eyebrow">KNOWLEDGE CHECK</div><h2>📝 Networking Quiz</h2>
+      <p class="muted">Test konsep networking selepas belajar dan buat lab. Best score disimpan dalam browser.</p></div>
+    <div class="hero-mark">📝</div>
+  </div>
+  <div class="quiz-shell">
+    <div class="quiz-menu">
+      <div class="quiz-stat"><b id="quizBestSide">0</b><small>Best Score</small></div>
+      <div class="quiz-stat"><b>10</b><small>Questions</small></div>
+      <div class="quiz-stat"><b>🏆</b><small>Complete quiz to improve your score</small></div>
+    </div>
+    <div class="card quiz-main">
+      <div class="quiz-header"><div><b>Networking Fundamentals</b><div class="quiz-progress"><i id="quizProgressBar"></i></div></div><span class="badge">10 Q</span></div>
+      <div id="quizArea"></div>
+    </div>
+  </div>
 </section>
 
 <section id="achievements" class="page">
- <div class="card"><div class="eyebrow">PROGRESS</div><h2>🏆 Achievements</h2><p class="muted">Unlock badge dengan menggunakan lab dan menyelesaikan quiz.</p><div class="grid grid2" id="achievementList"></div></div>
+  <div class="card page-hero">
+    <div><div class="eyebrow">YOUR PROGRESS</div><h2>🏆 Achievements</h2>
+      <p class="muted">Unlock badges dengan belajar, menggunakan simulator dan melengkapkan quiz.</p></div>
+    <div class="hero-mark">🏆</div>
+  </div>
+  <div class="achievement-summary">
+    <div class="summary-box"><b id="badgeUnlocked">0</b><small>Unlocked</small></div>
+    <div class="summary-box"><b id="badgeTotal">0</b><small>Total Badges</small></div>
+    <div class="summary-box"><b id="badgePercent">0%</b><small>Completion</small></div>
+  </div>
+  <div class="section-title"><div><h3>Badge Collection</h3><p>Keep practicing to unlock them all.</p></div></div>
+  <div class="badge-grid-v2" id="achievementList"></div>
 </section>
 </main>
 </div>
 
 <div class="mobile-nav" id="mobileNav">
- <button class="active" data-page="home">🏠<br>Home</button><button data-page="learn">📚<br>Learn</button><button data-page="tools">🧮<br>Tools</button><button data-page="simulator">🔬<br>Lab</button><button data-page="achievements">🏆<br>Badges</button>
+ <button class="active" data-page="home">🏠<br>Home</button><button data-page="learn">📚<br>Learn</button><button data-page="tools">🧮<br>Tools</button><button data-page="labHub">🔬<br>Lab</button><button data-page="achievements">🏆<br>Badges</button>
 </div>
 
 <script>
@@ -502,7 +689,7 @@ const quizData=[
 ["Layer 3 OSI ialah?","Network",["Physical","Data Link","Network","Transport"],2],
 ["169.254.x.x biasanya menunjukkan?","APIPA / DHCP gagal",["DNS berjaya","VLAN trunk aktif","Internet laju","Static route"],0]
 ];
-const pageTitles={home:"Home",learn:"Learn",lessonView:"Lesson",tools:"Network Tools",simulator:"Packet Simulator",vlanSimulator:"VLAN Simulator",subnetLab:"Subnetting Lab",dhcpLab:"DHCP Simulator",dnsLab:"DNS Simulator",osiLab:"OSI Model Lab",troubleLab:"Troubleshooting Lab",miniLab:"Mini Network Lab",quiz:"Quiz",achievements:"Achievements"};
+const pageTitles={home:"Home",labHub:"Lab Hub",learn:"Learn",lessonView:"Lesson",tools:"Network Tools",simulator:"Packet Simulator",vlanSimulator:"VLAN Simulator",subnetLab:"Subnetting Lab",dhcpLab:"DHCP Simulator",dnsLab:"DNS Simulator",osiLab:"OSI Model Lab",troubleLab:"Troubleshooting Lab",miniLab:"Mini Network Lab",quiz:"Quiz",achievements:"Achievements"};
 
 function showPage(id){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
@@ -657,10 +844,73 @@ function updateHome(){
  const pct=Math.round(done/12*100);document.getElementById("homeProgress").style.width=pct+"%";document.getElementById("homeProgressText").textContent=pct+"% complete";
  renderAchievements();
 }
+
+/* ===== COMPLETE UI INTERACTION OVERRIDES ===== */
+let activeLessonFilter="All";
+function setLessonFilter(filter,btn){
+  activeLessonFilter=filter;
+  document.querySelectorAll("#lessonFilters .chip").forEach(x=>x.classList.remove("active"));
+  if(btn)btn.classList.add("active");
+  filterLessons(document.getElementById("lessonSearch")?.value||"");
+}
+function filterLessons(q){
+  const grid=document.getElementById("lessonGrid"); if(!grid)return;
+  const query=(q||"").trim().toLowerCase();
+  grid.innerHTML=lessons.map((l,i)=>{
+    const done=localStorage.getItem("lesson_"+i)==="1";
+    const matchFilter=activeLessonFilter==="All"||l[2]===activeLessonFilter;
+    const matchQuery=!query||l[0].toLowerCase().includes(query)||l[1].toLowerCase().includes(query)||l[2].toLowerCase().includes(query);
+    if(!matchFilter||!matchQuery)return "";
+    const levelClass=l[2]==="Beginner"?"level-beginner":l[2]==="Intermediate"?"level-intermediate":"level-advanced";
+    return `<div class="card lesson-v2">
+      <div><div class="lesson-top"><div class="lesson-number">${String(i+1).padStart(2,"0")}</div><span class="badge ${levelClass}">${l[2]}</span></div>
+      <h3>${l[3]} ${l[0]}</h3><p class="muted">${l[1]}</p></div>
+      <div class="lesson-footer"><span class="lesson-status">${done?"✓ Completed":"Not started"}</span><button class="btn ${done?"success":"secondary"}" onclick="openLesson(${i})">${done?"Review":"Start →"}</button></div>
+    </div>`;
+  }).join("");
+  if(!grid.innerHTML)grid.innerHTML=`<div class="card" style="grid-column:1/-1"><b>No lessons found.</b><p class="muted">Try another search or filter.</p></div>`;
+}
+function renderLessons(){ filterLessons(document.getElementById("lessonSearch")?.value||""); }
+
+function renderAchievements(){
+  const data=achievementData(),unlocked=data.filter(x=>x[3]).length,total=data.length;
+  const list=document.getElementById("achievementList");
+  if(list)list.innerHTML=data.map(x=>`<div class="card badge-v2 ${x[3]?"":"locked"}"><div class="medal">${x[0]}</div><div><h3>${x[1]}</h3><p class="muted">${x[2]}</p><span class="badge">${x[3]?"UNLOCKED":"LOCKED"}</span></div></div>`).join("");
+  const u=document.getElementById("badgeUnlocked"),t=document.getElementById("badgeTotal"),pct=document.getElementById("badgePercent");
+  if(u)u.textContent=unlocked;if(t)t.textContent=total;if(pct)pct.textContent=(total?Math.round(unlocked/total*100):0)+"%";
+  const stat=document.getElementById("statAch");if(stat)stat.textContent=unlocked;
+}
+function updateHome(){
+  let done=0;lessons.forEach((_,i)=>{if(localStorage.getItem("lesson_"+i)==="1")done++});
+  const labs=["lab_packet","badge_vlanPilot","lab_subnet","lab_dhcp","lab_dns","lab_osi","lab_trouble","lab_mini"];
+  const labsDone=labs.filter(x=>localStorage.getItem(x)==="1").length;
+  const statLessons=document.getElementById("statLessons");if(statLessons)statLessons.textContent=`${done}/12`;
+  const statLabs=document.getElementById("statLabs");if(statLabs)statLabs.textContent=`${labsDone}/8`;
+  const best=localStorage.getItem("bestQuiz")||0;const statQuiz=document.getElementById("statQuiz");if(statQuiz)statQuiz.textContent=best;
+  const pct=Math.round(done/12*100);
+  const hp=document.getElementById("homeProgress");if(hp)hp.style.width=pct+"%";
+  const ht=document.getElementById("homeProgressText");if(ht)ht.textContent=pct+"% complete";
+  const op=document.getElementById("overallProgress");if(op)op.style.width=Math.min(100,Math.round((done+labsDone)/20*100))+"%";
+  const qs=document.getElementById("quizBestSide");if(qs)qs.textContent=best;
+  renderAchievements();
+}
+
 function init(){
  const s=document.getElementById("subnetPrefix");for(let i=8;i<=32;i++){const o=document.createElement("option");o.value=i;o.textContent="/"+i;if(i===24)o.selected=true;s.appendChild(o)}
  renderLessons();renderQuiz();renderOsi();updateHome();calculateSubnet();
 }
+
+document.addEventListener("click",()=>setTimeout(()=>{
+  const bar=document.getElementById("quizProgressBar");
+  const area=document.getElementById("quizArea");
+  if(bar&&area){
+    const txt=area.innerText||"";
+    const m=txt.match(/Question\s+(\d+)\s+of\s+(\d+)/i);
+    if(m)bar.style.width=Math.round((+m[1])/(+m[2])*100)+"%";
+    const best=document.getElementById("quizBestSide");if(best)best.textContent=localStorage.getItem("bestQuiz")||0;
+  }
+},20));
+
 init();
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js"));
 </script>
