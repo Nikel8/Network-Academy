@@ -7,7 +7,7 @@
 <meta name="description" content="Network Academy — free interactive networking learning lab">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon.svg">
-<title>Network Academy — V11</title>
+<title>Network Academy — V12</title>
 <style>
 :root{
  --bg:#040c17;--panel:#091a2d;--panel2:#0e2540;--line:#214363;--text:#eef7ff;--muted:#91a8c2;
@@ -166,6 +166,87 @@ body{
   .section-head{margin-top:17px}
 }
 
+
+/* =========================
+   V12 DASHBOARD + LEARNING PATH
+   ========================= */
+.hero{min-height:0;padding:24px}
+.hero h1{max-width:720px}
+.hero .actions{display:flex;gap:9px;flex-wrap:wrap}
+.hero .actions .btn{min-width:175px}
+.home-stats .card{min-height:92px}
+.home-stats .stat-icon{width:40px;height:40px;font-size:19px}
+.home-stats .n{font-size:22px!important}
+.continue-card{
+  grid-template-columns:auto 1fr auto;
+  padding:16px;
+  align-items:center;
+}
+.continue-main{display:contents}
+.continue-card .continue-icon{width:48px;height:48px;font-size:22px}
+.continue-card h3{font-size:14px}
+.continue-card p{font-size:11px}
+.progress-wrap{margin-top:7px}
+.learning-path{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.path-card{
+  position:relative;
+  padding:15px;
+  min-height:126px;
+  overflow:hidden;
+  cursor:pointer;
+}
+.path-card:after{
+  content:"";
+  position:absolute;
+  right:-25px;top:-30px;width:90px;height:90px;border-radius:50%;
+  background:#1c6ca622;
+}
+.path-card .path-icon{font-size:25px;margin-bottom:10px}
+.path-card h4{margin:0 0 4px;font-size:13px}
+.path-card p{margin:0;color:var(--muted);font-size:10px;line-height:1.45}
+.path-card .path-level{
+  display:inline-block;margin-top:10px;padding:4px 7px;border-radius:999px;
+  border:1px solid #315879;background:#0b2239;color:#b9dbf3;
+  font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.6px
+}
+.activity-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}
+.activity-item{
+  display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)
+}
+.activity-item:last-child{border-bottom:0}
+.activity-item .ai{
+  width:37px;height:37px;border-radius:11px;display:grid;place-items:center;
+  background:#102b46;border:1px solid #285575;font-size:17px;flex:0 0 auto
+}
+.activity-item b{font-size:11px}
+.activity-item small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.mini-progress{margin-top:6px;height:5px;background:#0b1a2a;border-radius:99px;overflow:hidden}
+.mini-progress i{display:block;height:100%;background:#20a7e8;border-radius:99px;width:35%}
+.streak{
+  display:flex;align-items:center;gap:12px;padding:13px;
+  border-radius:13px;background:#0a2138;border:1px solid #284c70
+}
+.streak .fire{font-size:27px}
+.streak b{font-size:15px}
+.streak small{display:block;color:var(--muted);font-size:9px;margin-top:2px}
+@media(max-width:900px){.learning-path{grid-template-columns:1fr 1fr}.activity-grid{grid-template-columns:1fr}}
+@media(max-width:720px){
+  .hero{padding:19px 17px}
+  .hero h1{font-size:27px}
+  .hero .hero-badges{gap:5px;margin:9px 0 13px}
+  .hero .hero-badges span{font-size:9px;padding:5px 7px}
+  .hero .actions{display:block}
+  .hero .actions .btn{width:100%;margin-top:7px}
+  .continue-card{grid-template-columns:auto 1fr;gap:11px}
+  .continue-card .btn{grid-column:1/-1}
+  .learning-path{grid-template-columns:1fr 1fr;gap:8px}
+  .path-card{min-height:112px;padding:12px}
+}
+
 </style>
 </head>
 <body>
@@ -194,7 +275,7 @@ body{
 
 <section id="home" class="page active">
   <div class="card hero">
-    <div class="eyebrow">NETWORK ACADEMY • V11</div>
+    <div class="eyebrow">NETWORKING • PRACTICE • SIMULATE</div>
     <h1>Learn Networking by Doing.</h1>
     <p class="muted">Belajar networking secara visual — daripada IP addressing dan subnetting sampai VLAN, DHCP, DNS dan troubleshooting.</p>
     <div class="hero-badges">
@@ -207,78 +288,64 @@ body{
   </div>
 
   <div class="section-head">
-    <div><h3>Your Progress</h3><p>Ringkasan pembelajaran anda</p></div>
+    <div><h3>Continue Learning</h3><p>Sambung dari laluan pembelajaran anda</p></div>
   </div>
-
-  <div class="grid grid4 home-stats">
-    <div class="card">
-      <div class="stat-icon">📚</div><div><div class="n" id="statLessons">0/12</div><div class="l">Lessons</div></div>
-    </div>
-    <div class="card">
-      <div class="stat-icon">🧪</div><div><div class="n" id="statLabs">0/8</div><div class="l">Labs Used</div></div>
-    </div>
-    <div class="card">
-      <div class="stat-icon">📝</div><div><div class="n" id="statQuiz">0</div><div class="l">Best Quiz</div></div>
-    </div>
-    <div class="card">
-      <div class="stat-icon">🏆</div><div><div class="n" id="statAch">0</div><div class="l">Badges</div></div>
-    </div>
-  </div>
-
-  <div class="section-head">
-    <div><h3>Continue Learning</h3><p>Cadangan berdasarkan laluan asas networking</p></div>
-  </div>
-
   <div class="card continue-card">
-    <div class="continue-main">
-      <div class="continue-icon">🧮</div>
-      <div>
-        <h3>Subnetting Fundamentals</h3>
-        <p>Fahami CIDR, subnet mask, network ID dan usable hosts.</p>
-        <div class="progress-wrap">
-          <div class="progress"><i id="homeProgress"></i></div>
-          <div style="font-size:10px;color:var(--muted);margin-top:5px" id="homeProgressText">0% complete</div>
-        </div>
+    <div class="continue-icon">🧮</div>
+    <div>
+      <h3 style="margin:0 0 3px">Subnetting Fundamentals</h3>
+      <p style="margin:0">CIDR, subnet mask, Network ID & usable hosts</p>
+      <div class="progress-wrap">
+        <div class="progress"><i id="homeProgress"></i></div>
+        <div style="font-size:9px;color:var(--muted);margin-top:4px" id="homeProgressText">0% complete</div>
       </div>
     </div>
     <button class="btn" onclick="showPage('subnetLab')">Open Lab →</button>
   </div>
 
   <div class="section-head">
-    <div><h3>Quick Access</h3><p>Tools & simulator yang selalu digunakan</p></div>
+    <div><h3>Your Progress</h3><p>Ringkasan pembelajaran anda</p></div>
+  </div>
+  <div class="grid grid4 home-stats">
+    <div class="card"><div class="stat-icon">📚</div><div><div class="n" id="statLessons">0/12</div><div class="l">Lessons</div></div></div>
+    <div class="card"><div class="stat-icon">🧪</div><div><div class="n" id="statLabs">0/8</div><div class="l">Labs Used</div></div></div>
+    <div class="card"><div class="stat-icon">📝</div><div><div class="n" id="statQuiz">0</div><div class="l">Best Quiz</div></div></div>
+    <div class="card"><div class="stat-icon">🏆</div><div><div class="n" id="statAch">0</div><div class="l">Badges</div></div></div>
   </div>
 
+  <div class="section-head">
+    <div><h3>Learning Path</h3><p>Ikut laluan dari asas hingga troubleshooting</p></div>
+  </div>
+  <div class="learning-path">
+    <div class="card path-card" onclick="showPage('learn')"><div class="path-icon">🟢</div><h4>Beginner</h4><p>Network basics, devices, IP & OSI.</p><span class="path-level">Start here</span></div>
+    <div class="card path-card" onclick="showPage('learn')"><div class="path-icon">🟡</div><h4>Intermediate</h4><p>Subnetting, VLAN, DHCP & DNS.</p><span class="path-level">Build skills</span></div>
+    <div class="card path-card" onclick="showPage('learn')"><div class="path-icon">🔴</div><h4>Advanced</h4><p>Routing, troubleshooting & network design.</p><span class="path-level">Challenge</span></div>
+  </div>
+
+  <div class="section-head">
+    <div><h3>Quick Access</h3><p>Tools & simulator</p></div>
+  </div>
   <div class="quick-grid">
     <div class="card quick-card" onclick="showPage('subnetLab')"><div class="qi">🧮</div><b>Subnetting</b><small>Calculate networks & hosts</small></div>
     <div class="card quick-card" onclick="showPage('vlanSimulator')"><div class="qi">🔀</div><b>VLAN</b><small>Test inter-VLAN routing</small></div>
     <div class="card quick-card" onclick="showPage('dhcpLab')"><div class="qi">📡</div><b>DHCP</b><small>Discover → Offer → ACK</small></div>
-    <div class="card quick-card" onclick="showPage('dnsLab')"><div class="qi">🌐</div><b>DNS</b><small>Hostname → IP resolution</small></div>
+    <div class="card quick-card" onclick="showPage('dnsLab')"><div class="qi">🌐</div><b>DNS</b><small>Hostname → IP</small></div>
   </div>
 
-  <div class="home-lab-grid">
+  <div class="section-head">
+    <div><h3>Recent Activity</h3><p>Aktiviti latihan anda</p></div>
+  </div>
+  <div class="activity-grid">
     <div class="card">
-      <div class="section-head" style="margin:0 0 10px">
-        <div><h3>🧪 Lab Hub</h3><p>Practice tanpa takut rosakkan network sebenar</p></div>
-      </div>
-      <div class="lab-list">
-        <div class="lab-item" onclick="showPage('simulator')"><div class="li">🔬</div><div><b>Packet Simulator</b><small>Layer 2 → Layer 3 flow</small></div></div>
-        <div class="lab-item" onclick="showPage('vlanSimulator')"><div class="li">🔀</div><div><b>VLAN Simulator</b><small>Access, VLAN & routing</small></div></div>
-        <div class="lab-item" onclick="showPage('dhcpLab')"><div class="li">📡</div><div><b>DHCP Simulator</b><small>DORA process</small></div></div>
-        <div class="lab-item" onclick="showPage('dnsLab')"><div class="li">🌐</div><div><b>DNS Simulator</b><small>DNS query flow</small></div></div>
-        <div class="lab-item" onclick="showPage('osiLab')"><div class="li">🧩</div><div><b>OSI Model</b><small>7 layers & protocols</small></div></div>
-        <div class="lab-item" onclick="showPage('troubleLab')"><div class="li">🛠️</div><div><b>Troubleshooting</b><small>Diagnose network issues</small></div></div>
-      </div>
+      <div class="activity-item"><div class="ai">🔀</div><div><b>VLAN Simulator</b><small>Inter-VLAN routing practice</small></div><span class="badge">LAB</span></div>
+      <div class="activity-item"><div class="ai">📡</div><div><b>DHCP Simulator</b><small>DORA process</small></div><span class="badge">LAB</span></div>
+      <div class="activity-item"><div class="ai">🧮</div><div><b>Subnetting Lab</b><small>IPv4 subnet calculation</small></div><span class="badge">TOOL</span></div>
     </div>
-
-    <div class="card tip-card">
-      <div class="tip-icon">💡</div>
-      <h3>Networking Tip</h3>
-      <p class="muted">Kalau troubleshooting, jangan terus salahkan DNS. Check <b>Layer 1 → IP → Gateway → DNS → Application</b>.</p>
-      <div class="result">
-        <b>Remember:</b><br>
-        <span class="muted">“Check the basics first.”</span>
-      </div>
-      <button class="btn secondary" style="margin-top:10px" onclick="showPage('troubleLab')">Practice Troubleshooting →</button>
+    <div class="card">
+      <div class="streak"><div class="fire">🔥</div><div><b>Keep learning</b><small>Complete one lesson or lab today.</small></div></div>
+      <div style="margin-top:12px;font-size:10px;color:var(--muted)">Overall progress</div>
+      <div class="mini-progress"><i id="overallProgress"></i></div>
+      <div style="font-size:9px;color:var(--muted);margin-top:5px">Your saved progress will appear here.</div>
     </div>
   </div>
 </section>
