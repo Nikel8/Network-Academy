@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071426">
 <meta name="description" content="Network Academy - Learn networking basics, subnetting and troubleshooting.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>Network Academy</title>
 <style>
 :root{
@@ -243,5 +245,6 @@ function nextQuestion(){
 }
 renderLessons();updateProgress();
 </script>
+<script>if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js")); }</script>
 </body>
 </html>
