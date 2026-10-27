@@ -5,7 +5,7 @@
   "display":"standalone",
   "background_color":"#040c17",
   "theme_color":"#071426",
-  "description":"Network Academy — interactive networking learning platform",
+  "description":"Network Academy — interactive networking learning, lab and certification platform",
   "icons":[
     {"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
   ]

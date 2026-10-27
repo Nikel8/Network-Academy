@@ -409,6 +409,10 @@ body{
  .lesson-nav{display:grid;grid-template-columns:1fr 1fr}
 }
 
+
+/* vNext practical lab + certification */
+.challenge-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.network-builder{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:18px;border:1px solid var(--line);border-radius:14px;background:#061321}.network-builder .node{min-width:105px}.check-list{display:grid;gap:8px;margin-top:12px}.check-item{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#081a2a}.check-item.ok{border-color:#2e9d72}.check-item.bad{border-color:#b84d5b}.cert-shell{display:grid;grid-template-columns:220px 1fr;gap:14px}.cert-side{align-self:start}.cert-card{padding:14px;border:1px solid var(--line);border-radius:12px;background:#071726}.cert-q{font-size:15px;line-height:1.5}.cert-option{width:100%;text-align:left;margin-top:8px;padding:12px;border:1px solid var(--line);background:#0a1c2d;color:var(--text);border-radius:10px;cursor:pointer}.cert-option:hover{border-color:var(--cyan)}.cert-option.correct{border-color:#2e9d72;background:#0b2a22}.cert-option.wrong{border-color:#b84d5b;background:#2b1117}.timer{font-variant-numeric:tabular-nums;font-weight:800;color:var(--cyan)}
+@media(max-width:720px){.challenge-grid,.cert-shell{grid-template-columns:1fr}.config-grid{grid-template-columns:1fr}.network-builder .node{min-width:90px}}
 </style>
 </head>
 <body>
@@ -427,13 +431,16 @@ body{
     <button data-page="osiLab">🧩 OSI Model Lab</button>
     <button data-page="troubleLab">🛠️ Troubleshooting Lab</button>
     <button data-page="miniLab">🏗️ Mini Network Lab</button>
+    <button data-page="networkBuildLab">🧱 Network Build Lab</button>
+    <button data-page="challengeLab">🎯 Troubleshooting Challenge</button>
+    <button data-page="certification">🎓 Certification</button>
     <button data-page="quiz">📝 Quiz</button>
     <button data-page="achievements">🏆 Achievements</button>
   </div>
 </aside>
 
 <main class="main">
-  <div class="topbar"><div><div class="eyebrow">NETWORKING • PRACTICE • SIMULATE</div><div class="page-title" id="pageTitle">Home</div></div><span class="badge">FREE • V10</span></div>
+  <div class="topbar"><div><div class="eyebrow">NETWORKING • PRACTICE • SIMULATE</div><div class="page-title" id="pageTitle">Home</div></div><span class="badge">FREE • vNext</span></div>
 
 <section id="home" class="page active">
   <div class="card hero">
@@ -568,6 +575,9 @@ body{
     <div class="card lab-v2" onclick="showPage('troubleLab')"><div><div class="lab-big">🛠️</div><h3>Troubleshooting Lab</h3><p class="muted">Diagnose issue secara sistematik dari Layer 1.</p></div><div class="lab-bottom"><span class="lab-state">Diagnose</span><span class="badge">OPEN →</span></div></div>
     <div class="card lab-v2" onclick="showPage('miniLab')"><div><div class="lab-big">🏗️</div><h3>Mini Network Lab</h3><p class="muted">Gabungkan IP, VLAN, gateway, DHCP dan routing.</p></div><div class="lab-bottom"><span class="lab-state">Challenge</span><span class="badge">OPEN →</span></div></div>
     <div class="card lab-v2" onclick="showPage('quiz')"><div><div class="lab-big">📝</div><h3>Lab Knowledge Check</h3><p class="muted">Uji kefahaman selepas practice.</p></div><div class="lab-bottom"><span class="lab-state">10 Questions</span><span class="badge">TAKE QUIZ →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('networkBuildLab')"><div><div class="lab-big">🧱</div><h3>Network Build Lab</h3><p class="muted">Configure IP, gateway, VLAN dan routing seperti mini deployment.</p></div><div class="lab-bottom"><span class="lab-state">Build & Test</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('challengeLab')"><div><div class="lab-big">🎯</div><h3>Troubleshooting Challenge</h3><p class="muted">Cari punca sebenar berdasarkan simptom dan evidence.</p></div><div class="lab-bottom"><span class="lab-state">Scored</span><span class="badge">OPEN →</span></div></div>
+    <div class="card lab-v2" onclick="showPage('certification')"><div><div class="lab-big">🎓</div><h3>Certification Mode</h3><p class="muted">20 soalan, timer, pass/fail dan review jawapan.</p></div><div class="lab-bottom"><span class="lab-state">20 Questions</span><span class="badge">START →</span></div></div>
   </div>
 </section>
 <section id="simulator" class="page">
@@ -663,6 +673,33 @@ body{
  </div>
 </section>
 
+
+<section id="networkBuildLab" class="page">
+ <div class="card page-hero"><div><div class="eyebrow">PRACTICAL NETWORK BUILD</div><h2>🧱 Network Build Lab</h2><p class="muted">Configure mini network dan validate connectivity. Anggap ini seperti deployment kecil di pejabat.</p></div><div class="hero-mark">🧱</div></div>
+ <div class="card"><div class="network-builder"><div class="node">💻<b>PC</b><small>Client</small></div><div class="arrow">→</div><div class="node">🔀<b>Switch</b><small>Access VLAN</small></div><div class="arrow">→</div><div class="node">🌐<b>Router / L3</b><small>Gateway</small></div><div class="arrow">→</div><div class="node">🖥️<b>Server</b><small>10.10.20.10</small></div></div></div>
+ <div class="challenge-grid" style="margin-top:14px">
+  <div class="card"><h3>⚙️ Configuration</h3><div class="config-grid">
+   <div class="field"><label>PC IP</label><input id="buildIp" value="10.10.10.10"></div><div class="field"><label>Subnet Mask</label><input id="buildMask" value="255.255.255.0"></div>
+   <div class="field"><label>Default Gateway</label><input id="buildGw" value="10.10.10.1"></div><div class="field"><label>PC VLAN</label><select id="buildVlan"><option value="10">10</option><option value="20">20</option></select></div>
+   <div class="field"><label>Server IP</label><input id="buildServer" value="10.10.20.10"></div><div class="field"><label>Server VLAN</label><select id="buildServerVlan"><option value="20">20</option><option value="10">10</option></select></div>
+  </div><div class="actions" style="margin-top:12px"><button class="btn" onclick="validateBuildLab()">🧪 Validate Network</button><button class="btn secondary" onclick="resetBuildLab()">↺ Reset</button></div></div>
+  <div class="card"><h3>📋 Validation</h3><div id="buildResult" class="result">Ready. Configure the network then run validation.</div><div id="buildChecks" class="check-list"></div></div>
+ </div>
+</section>
+
+<section id="challengeLab" class="page">
+ <div class="card page-hero"><div><div class="eyebrow">TROUBLESHOOTING CHALLENGE</div><h2>🎯 Diagnose the Fault</h2><p class="muted">Pilih diagnosis paling tepat. Jangan terus lompat ke DNS kalau IP/gateway belum betul.</p></div><div class="hero-mark">🎯</div></div>
+ <div class="challenge-grid">
+  <div class="card"><div class="badge" id="challengeBadge">Scenario 1 / 5</div><h3 id="challengeTitle" style="margin-top:12px"></h3><p id="challengeSymptom" class="muted"></p><div id="challengeOptions"></div><div class="actions" style="margin-top:14px"><button class="btn secondary" onclick="nextChallenge()">Next Scenario →</button><button class="btn secondary" onclick="resetChallenges()">↺ Reset</button></div></div>
+  <div class="card"><h3>📊 Challenge Score</h3><div class="kpi-grid"><div class="kpi"><b id="challengeScore">0</b><small>Correct</small></div><div class="kpi"><b id="challengeDone">0</b><small>Answered</small></div><div class="kpi"><b id="challengeBest">0</b><small>Best</small></div><div class="kpi"><b id="challengePercent">0%</b><small>Accuracy</small></div></div><div id="challengeFeedback" class="result" style="margin-top:12px">Choose a diagnosis.</div></div>
+ </div>
+</section>
+
+<section id="certification" class="page">
+ <div class="card page-hero"><div><div class="eyebrow">CERTIFICATION MODE</div><h2>🎓 Network Academy Certification</h2><p class="muted">20 soalan • 15 minit • lulus pada 70%. Jawapan dan keputusan disimpan dalam browser.</p></div><div class="hero-mark">🎓</div></div>
+ <div class="cert-shell"><div class="cert-side"><div class="cert-card"><small>Best Score</small><h2 id="certBest">0%</h2></div><div class="cert-card" style="margin-top:10px"><small>Question</small><h2 id="certCount">0 / 20</h2></div><div class="cert-card" style="margin-top:10px"><small>Time</small><h2 class="timer" id="certTimer">15:00</h2></div><button class="btn" style="width:100%;margin-top:10px" onclick="startCertification()">▶ Start / Restart</button></div>
+ <div class="card"><div id="certIntro" class="result"><b>Ready?</b><br>Tekan Start untuk mula. Selepas submit, anda akan nampak score, pass/fail dan review.</div><div id="certQuestion"></div><div id="certResult" style="margin-top:12px"></div></div></div>
+</section>
 <section id="quiz" class="page">
   <div class="card page-hero">
     <div><div class="eyebrow">KNOWLEDGE CHECK</div><h2>📝 Networking Quiz</h2>
@@ -730,7 +767,7 @@ const quizData=[
 ["Layer 3 OSI ialah?","Network",["Physical","Data Link","Network","Transport"],2],
 ["169.254.x.x biasanya menunjukkan?","APIPA / DHCP gagal",["DNS berjaya","VLAN trunk aktif","Internet laju","Static route"],0]
 ];
-const pageTitles={home:"Home",lessonViewer:"Lesson",labHub:"Lab Hub",learn:"Learn",lessonView:"Lesson",tools:"Network Tools",simulator:"Packet Simulator",vlanSimulator:"VLAN Simulator",subnetLab:"Subnetting Lab",dhcpLab:"DHCP Simulator",dnsLab:"DNS Simulator",osiLab:"OSI Model Lab",troubleLab:"Troubleshooting Lab",miniLab:"Mini Network Lab",quiz:"Quiz",achievements:"Achievements"};
+const pageTitles={home:"Home",lessonViewer:"Lesson",labHub:"Lab Hub",learn:"Learn",lessonView:"Lesson",tools:"Network Tools",simulator:"Packet Simulator",vlanSimulator:"VLAN Simulator",subnetLab:"Subnetting Lab",dhcpLab:"DHCP Simulator",dnsLab:"DNS Simulator",osiLab:"OSI Model Lab",troubleLab:"Troubleshooting Lab",miniLab:"Mini Network Lab",networkBuildLab:"Network Build Lab",challengeLab:"Troubleshooting Challenge",certification:"Certification",quiz:"Quiz",achievements:"Achievements"};
 
 function showPage(id){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
@@ -869,6 +906,9 @@ function achievementData(){
  ["🧩","OSI Explorer","Open OSI Model Lab",!!localStorage.getItem("lab_osi")],
  ["🛠️","Troubleshooter","Solve the DHCP scenario",!!localStorage.getItem("lab_trouble")],
  ["🏗️","Network Builder","Pass Mini Network Lab",!!localStorage.getItem("lab_mini")],
+ ["🧱","Build Engineer","Validate the Network Build Lab",!!localStorage.getItem("lab_networkBuild")],
+ ["🎯","Troubleshooting Pro","Complete the Troubleshooting Challenge",!!localStorage.getItem("lab_challenge")],
+ ["🎓","Certified","Pass Certification Mode at 70% or above",!!localStorage.getItem("badge_certified")],
  ["🧠","Quiz Master","Score at least 8/10",Number(localStorage.getItem("bestQuiz")||0)>=8]
  ];
 }
@@ -880,7 +920,7 @@ function renderAchievements(){
 function updateHome(){
  let done=0;lessons.forEach((_,i)=>{if(localStorage.getItem("lesson_"+i)==="1")done++});
  document.getElementById("statLessons").textContent=`${done}/12`;
- const labs=["lab_packet","badge_vlanPilot","lab_subnet","lab_dhcp","lab_dns","lab_osi","lab_trouble","lab_mini"];document.getElementById("statLabs").textContent=`${labs.filter(x=>localStorage.getItem(x)==="1").length}/8`;
+ const labs=["lab_packet","badge_vlanPilot","lab_subnet","lab_dhcp","lab_dns","lab_osi","lab_trouble","lab_mini","lab_networkBuild","lab_challenge"];document.getElementById("statLabs").textContent=`${labs.filter(x=>localStorage.getItem(x)==="1").length}/8`;
  document.getElementById("statQuiz").textContent=localStorage.getItem("bestQuiz")||0;
  const pct=Math.round(done/12*100);document.getElementById("homeProgress").style.width=pct+"%";document.getElementById("homeProgressText").textContent=pct+"% complete";
  renderAchievements();
@@ -923,7 +963,7 @@ function renderAchievements(){
 }
 function updateHome(){
   let done=0;lessons.forEach((_,i)=>{if(localStorage.getItem("lesson_"+i)==="1")done++});
-  const labs=["lab_packet","badge_vlanPilot","lab_subnet","lab_dhcp","lab_dns","lab_osi","lab_trouble","lab_mini"];
+  const labs=["lab_packet","badge_vlanPilot","lab_subnet","lab_dhcp","lab_dns","lab_osi","lab_trouble","lab_mini","lab_networkBuild","lab_challenge"];
   const labsDone=labs.filter(x=>localStorage.getItem(x)==="1").length;
   const statLessons=document.getElementById("statLessons");if(statLessons)statLessons.textContent=`${done}/12`;
   const statLabs=document.getElementById("statLabs");if(statLabs)statLabs.textContent=`${labsDone}/8`;
@@ -1018,6 +1058,60 @@ function calculateSubnet(){
  const hosts=p<=30?Math.pow(2,32-p)-2:(p===31?0:1);
  out.innerHTML=`<div class="kpi-grid"><div class="kpi"><b>${toIp(net)}</b><small>Network ID</small></div><div class="kpi"><b>${toIp(broadcast)}</b><small>Broadcast</small></div><div class="kpi"><b>${hosts}</b><small>Usable Hosts</small></div><div class="kpi"><b>/${p}</b><small>CIDR</small></div></div>`;
 }
+
+const buildDefaults={ip:"10.10.10.10",mask:"255.255.255.0",gw:"10.10.10.1",vlan:"10",server:"10.10.20.10",serverVlan:"20"};
+function validateBuildLab(){
+ const ip=document.getElementById("buildIp").value.trim(),mask=document.getElementById("buildMask").value.trim(),gw=document.getElementById("buildGw").value.trim(),vlan=document.getElementById("buildVlan").value,server=document.getElementById("buildServer").value.trim(),sv=document.getElementById("buildServerVlan").value;
+ const checks=[
+  [ip==="10.10.10.10","PC IP matches expected address."],[mask==="255.255.255.0","Subnet mask is /24."],[gw==="10.10.10.1","Default gateway is correct."],[vlan==="10","PC is in VLAN 10."],[server==="10.10.20.10","Server IP matches expected address."],[sv==="20","Server is in VLAN 20."],[gw.split('.').slice(0,3).join('.')===ip.split('.').slice(0,3).join('.'),"PC and gateway are in the same subnet."],[vlan!==sv,"Different VLANs require Layer 3 routing."]
+ ];
+ const ok=checks.filter(x=>x[0]).length;document.getElementById("buildChecks").innerHTML=checks.map(x=>`<div class="check-item ${x[0]?"ok":"bad"}">${x[0]?"✅":"❌"} ${x[1]}</div>`).join("");
+ const out=document.getElementById("buildResult");out.className="result "+(ok===checks.length?"good":"bad");out.innerHTML=ok===checks.length?"🎉 <b>Network build validated!</b> You are ready to test connectivity.":`⚠️ <b>${ok}/${checks.length} checks passed.</b> Fix the failed items and validate again.`;
+ if(ok===checks.length)localStorage.setItem("lab_networkBuild","1");updateHome();renderAchievements();
+}
+function resetBuildLab(){Object.entries(buildDefaults).forEach(([k,v])=>{const el=document.getElementById("build"+k.charAt(0).toUpperCase()+k.slice(1));if(el)el.value=v});document.getElementById("buildChecks").innerHTML="";document.getElementById("buildResult").className="result";document.getElementById("buildResult").textContent="Ready. Configure the network then run validation."}
+const challengeData=[
+ ["PC has 169.254.x.x","Link is up, but the client self-assigned an APIPA address. What should you check first?",[["DNS server","DHCP service / scope","Browser cache","Web server"],1,"169.254.x.x commonly indicates DHCP configuration or lease failure."]],
+ ["PC can ping gateway but not by name","Ping 8.8.8.8 works, but ping example.com fails. What is most likely?",[["Cable","VLAN","DNS resolution","Subnet mask"],2,"IP connectivity works; name resolution is the likely problem."]],
+ ["Two VLANs cannot communicate","VLAN 10 and VLAN 20 are healthy, but hosts cannot reach each other. What is required?",[["Inter-VLAN routing","More DHCP leases","A longer cable","DNS only"],0,"Different IP networks/VLANs need Layer 3 routing."]],
+ ["No link light","A desktop shows no link light and has no connectivity. What is the first check?",[["DNS","Physical cable / port","Default route","Hostname"],1,"Start at Layer 1: cable, port, transceiver or link state." ]],
+ ["Correct IP, wrong gateway","Client IP is 192.168.10.20/24 but gateway is 192.168.20.1. Internet fails. What is wrong?",[["Gateway is on a different subnet","DNS is too fast","Switch MAC table","DHCP relay only"],0,"The default gateway should normally be reachable within the client subnet."]]
+];
+let challengeIndex=0,challengeScore=0,challengeAnswered=false;
+function renderChallenge(){const d=challengeData[challengeIndex];document.getElementById("challengeBadge").textContent=`Scenario ${challengeIndex+1} / ${challengeData.length}`;document.getElementById("challengeTitle").textContent=d[0];document.getElementById("challengeSymptom").textContent=d[1];document.getElementById("challengeOptions").innerHTML=d[2][0].map((x,i)=>`<button class="cert-option" onclick="answerChallenge(${i})">${x}</button>`).join("");challengeAnswered=false;document.getElementById("challengeFeedback").textContent="Choose a diagnosis.";updateChallengeStats()}
+function answerChallenge(i){if(challengeAnswered)return;challengeAnswered=true;const d=challengeData[challengeIndex],buttons=document.querySelectorAll("#challengeOptions .cert-option");buttons.forEach((b,j)=>{b.disabled=true;if(j===d[2][1])b.classList.add("correct");if(j===i&&i!==d[2][1])b.classList.add("wrong")});if(i===d[2][1]){challengeScore++;document.getElementById("challengeFeedback").className="result good";document.getElementById("challengeFeedback").innerHTML="✅ Correct — "+d[2][2]}else{document.getElementById("challengeFeedback").className="result bad";document.getElementById("challengeFeedback").innerHTML="❌ Not quite — "+d[2][2]}localStorage.setItem("challengeBest",Math.max(Number(localStorage.getItem("challengeBest")||0),challengeScore));updateChallengeStats()}
+function nextChallenge(){if(challengeIndex<challengeData.length-1){challengeIndex++;renderChallenge()}else{document.getElementById("challengeFeedback").className="result";document.getElementById("challengeFeedback").innerHTML=`🏁 Challenge complete. Score <b>${challengeScore}/${challengeData.length}</b>.`;localStorage.setItem("lab_challenge","1");renderAchievements();updateHome()}}
+function resetChallenges(){challengeIndex=0;challengeScore=0;renderChallenge()}
+function updateChallengeStats(){document.getElementById("challengeScore").textContent=challengeScore;document.getElementById("challengeDone").textContent=challengeAnswered?challengeIndex+1:challengeIndex;document.getElementById("challengeBest").textContent=localStorage.getItem("challengeBest")||0;document.getElementById("challengePercent").textContent=(challengeIndex+(challengeAnswered?1:0)?Math.round(challengeScore/Math.max(1,challengeIndex+(challengeAnswered?1:0))*100):0)+"%"}
+const certQuestions=[
+ ["Which device normally forwards traffic between different IP networks?",["Switch","Router","Hub","Access Point"],1],
+ ["How many usable hosts does a /26 IPv4 subnet provide?",["30","62","126","254"],1],
+ ["Which protocol resolves a hostname to an IPv4 address?",["DHCP","ARP","DNS","STP"],2],
+ ["What is the correct DHCP sequence?",["Discover, Offer, Request, ACK","Offer, Discover, ACK, Request","Request, Discover, Offer, ACK","ACK, Offer, Discover, Request"],0],
+ ["A switch primarily forwards Ethernet frames using what?",["IP address","MAC address","DNS name","Default gateway"],1],
+ ["Which VLAN type is normally used for an endpoint connected to an access port?",["One VLAN","All VLANs untagged","Only VLAN 4095","No VLAN"],0],
+ ["What does a default gateway provide?",["A path to other networks","A DNS record","A MAC table","A Wi-Fi channel"],0],
+ ["What does 169.254.x.x usually indicate on a Windows client?",["Successful DHCP","APIPA / DHCP issue","DNS success","Static routing"],1],
+ ["Which OSI layer is associated with IP routing?",["Layer 1","Layer 2","Layer 3","Layer 7"],2],
+ ["802.1Q is associated with what?",["VLAN tagging","DNS","DHCP","NAT only"],0],
+ ["What should you check first when there is no link light?",["DNS","Physical connection / port","Browser","Default route"],1],
+ ["If a host can ping 8.8.8.8 but not example.com, what should you investigate?",["DNS","Cable","VLAN ID only","Monitor"],0],
+ ["Inter-VLAN communication requires what?",["Layer 3 routing","Only a longer cable","DNS only","A hub"],0],
+ ["Which address identifies a network interface at Layer 2?",["MAC address","Subnet mask","Gateway","DNS server"],0],
+ ["What does /24 represent?",["24 host bits","24 network bits","24 usable hosts","24 VLANs"],1],
+ ["A routing table is mainly used to decide what?",["Where to forward IP packets","Which DNS record to create","Which cable to use","Which browser to open"],0],
+ ["What is the purpose of DHCP?",["Dynamic network configuration","Encrypt all traffic","Replace switches","Create VLAN tags"],0],
+ ["Which is a Layer 2 segmentation concept?",["VLAN","DNS","IP routing","DHCP lease"],0],
+ ["A correct troubleshooting approach should generally do what?",["Change many things at once","Start with evidence and isolate the fault","Restart everything immediately","Skip physical checks"],1],
+ ["Which device can perform inter-VLAN routing when Layer 3 capable?",["L3 switch","Unmanaged hub","Patch panel","Repeater"],0]
+];
+let certIndex=0,certScore=0,certAnswers=[],certTimerId=null,certRunning=false,certSeconds=900;
+function startCertification(){clearInterval(certTimerId);certIndex=0;certScore=0;certAnswers=[];certSeconds=900;certRunning=true;document.getElementById("certResult").innerHTML="";document.getElementById("certIntro").style.display="none";renderCertQuestion();certTimerId=setInterval(()=>{certSeconds--;updateCertTimer();if(certSeconds<=0)finishCertification()},1000)}
+function updateCertTimer(){const m=String(Math.floor(certSeconds/60)).padStart(2,"0"),s=String(certSeconds%60).padStart(2,"0");document.getElementById("certTimer").textContent=`${m}:${s}`}
+function renderCertQuestion(){const q=certQuestions[certIndex];document.getElementById("certCount").textContent=`${certIndex+1} / ${certQuestions.length}`;document.getElementById("certQuestion").innerHTML=`<div class="cert-card"><div class="badge">Question ${certIndex+1}</div><p class="cert-q"><b>${q[0]}</b></p>${q[1].map((x,i)=>`<button class="cert-option" onclick="answerCert(${i})">${x}</button>`).join("")}</div>`;updateCertTimer()}
+function answerCert(i){if(!certRunning)return;const q=certQuestions[certIndex],buttons=document.querySelectorAll("#certQuestion .cert-option");buttons.forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add("correct");if(j===i&&i!==q[2])b.classList.add("wrong")});if(i===q[2])certScore++;certAnswers.push({q:q[0],chosen:i,correct:q[2],options:q[1]});setTimeout(()=>{certIndex++;if(certIndex>=certQuestions.length)finishCertification();else renderCertQuestion()},350)}
+function finishCertification(){if(!certRunning)return;certRunning=false;clearInterval(certTimerId);const pct=Math.round(certScore/certQuestions.length*100),pass=pct>=70,best=Math.max(Number(localStorage.getItem("certBest")||0),pct);localStorage.setItem("certBest",best);if(pass)localStorage.setItem("badge_certified","1");document.getElementById("certBest").textContent=best+"%";document.getElementById("certQuestion").innerHTML="";document.getElementById("certResult").innerHTML=`<div class="result ${pass?"good":"bad"}"><h3>${pass?"🎓 PASSED":"📘 NOT PASSED"}</h3><p>Score: <b>${certScore}/${certQuestions.length} (${pct}%)</b></p><p>${pass?"Tahniah! Anda melepasi 70% certification threshold.":"Belum lepas. Review lesson dan lab, kemudian cuba lagi."}</p></div><div class="cert-card"><h3>Review</h3>${certAnswers.map((a,i)=>`<div class="check-item ${a.chosen===a.correct?"ok":"bad"}">${i+1}. ${a.q}<br><small>${a.chosen===a.correct?"✅ Correct":"❌ Correct answer: "+a.options[a.correct]}</small></div>`).join("")}</div>`;renderAchievements();updateHome()}
+
 function openFullQuiz(){
  showPage("quiz");
  const a=document.getElementById("quizArea");
@@ -1026,7 +1120,7 @@ function openFullQuiz(){
 
 function init(){
  const s=document.getElementById("subnetPrefix");for(let i=8;i<=32;i++){const o=document.createElement("option");o.value=i;o.textContent="/"+i;if(i===24)o.selected=true;s.appendChild(o)}
- renderLessons();renderQuiz();renderOsi();updateHome();calculateSubnet();
+ renderLessons();renderQuiz();renderOsi();updateHome();calculateSubnet();renderChallenge();document.getElementById("certBest").textContent=(localStorage.getItem("certBest")||0)+"%";
 }
 
 document.addEventListener("click",()=>setTimeout(()=>{
