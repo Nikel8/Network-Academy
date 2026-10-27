@@ -1,17 +1,10 @@
 {
-  "name": "Network Academy",
-  "short_name": "Net Academy",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#050b14",
-  "theme_color": "#07111f",
-  "description": "Free interactive networking learning app",
-  "icons": [
-    {
-      "src": "icons/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+  "name":"Network Academy",
+  "short_name":"Net Academy",
+  "start_url":".",
+  "display":"standalone",
+  "background_color":"#061222",
+  "theme_color":"#071426",
+  "description":"Network Academy - interactive networking learning app",
+  "icons":[{"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }
