@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071426">
+<meta name="description" content="Network Academy - Learn networking basics, subnetting and troubleshooting.">
+<title>Network Academy</title>
+<style>
+:root{
+  --bg:#071426; --panel:#0d1d33; --panel2:#102642; --text:#edf5ff;
+  --muted:#91a6bf; --blue:#3182f6; --cyan:#35c8ff; --line:#1d3553;
+  --good:#35d49a; --danger:#ff667a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#050d19,#071426 55%,#0b1d35);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:250px;background:rgba(6,17,31,.94);border-right:1px solid var(--line);padding:24px 16px;position:fixed;inset:0 auto 0 0;z-index:5}
+.logo{font-size:21px;font-weight:800;margin:4px 10px 30px;letter-spacing:.3px}
+.logo span{color:var(--cyan)}
+.nav button{width:100%;border:0;background:transparent;color:var(--muted);padding:13px 14px;text-align:left;border-radius:12px;margin:3px 0;font-weight:600}
+.nav button:hover,.nav button.active{background:var(--panel2);color:var(--text)}
+.main{margin-left:250px;width:calc(100% - 250px);padding:30px;max-width:1500px}
+.topbar{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:25px}
+.topbar h1{margin:0;font-size:30px}
+.search{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 14px;color:var(--text);width:min(300px,45vw);outline:none}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:rgba(13,29,51,.88);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 12px 35px rgba(0,0,0,.16)}
+.stat{min-height:125px}
+.stat .icon{font-size:25px}.stat .num{font-size:30px;font-weight:800;margin-top:10px}.muted{color:var(--muted)}
+.section{margin-top:20px}.section h2{font-size:20px;margin:0 0 14px}
+.lesson-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.lesson{transition:.2s}.lesson:hover{transform:translateY(-2px);border-color:#315b87}
+.lesson h3{margin:10px 0 7px}.lesson p{color:var(--muted);line-height:1.55;margin:0}
+.badge{display:inline-block;background:#153458;color:#8fdcff;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:700}
+.btn{border:0;background:var(--blue);color:white;padding:11px 15px;border-radius:10px;font-weight:700}
+.btn.secondary{background:#17304d}.btn:disabled{opacity:.45;cursor:not-allowed}
+.page{display:none}.page.active{display:block}
+.lesson-view h2{font-size:28px;margin-top:0}.lesson-view p,.lesson-view li{color:#c5d3e2;line-height:1.7}
+.code{background:#050d18;border:1px solid var(--line);padding:15px;border-radius:12px;overflow:auto;color:#bdeaff;font-family:Consolas,monospace}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:16px}.calc input{width:100%;margin:7px 0 15px;background:#071426;border:1px solid var(--line);border-radius:10px;padding:12px;color:white;outline:none}
+.result{background:#08192d;border:1px solid var(--line);border-radius:14px;padding:16px;line-height:1.8}
+.quiz-option{display:block;width:100%;text-align:left;background:#0b1b30;color:var(--text);border:1px solid var(--line);padding:13px;border-radius:10px;margin:9px 0}
+.quiz-option.correct{border-color:var(--good);background:#0b2b25}.quiz-option.wrong{border-color:var(--danger);background:#351824}
+.mobile{display:none}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}.lesson-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){
+ .sidebar{display:none}.main{margin:0;width:100%;padding:18px;padding-bottom:85px}
+ .mobile{display:block;position:fixed;bottom:0;left:0;right:0;background:#061321;border-top:1px solid var(--line);z-index:10;padding:8px}
+ .mobile nav{display:flex;justify-content:space-around}.mobile button{background:none;border:0;color:var(--muted);font-size:12px}.mobile button.active{color:white}
+ .topbar{align-items:flex-start;flex-direction:column}.search{width:100%}
+ .grid,.lesson-grid,.calc{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo">🌐 Network <span>Academy</span></div>
+  <nav class="nav">
+    <button class="active" data-page="home">🏠 Home</button>
+    <button data-page="learn">📚 Learn</button>
+    <button data-page="tools">🧮 Network Tools</button>
+    <button data-page="quiz">📝 Quiz</button>
+  </nav>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div><div class="muted">NETWORK ACADEMY</div><h1 id="pageTitle">Dashboard</h1></div>
+  <input id="search" class="search" placeholder="🔎 Search lessons..." oninput="searchLessons(this.value)">
+</header>
+
+<section id="home" class="page active">
+  <div class="grid">
+    <div class="card stat"><div class="icon">📚</div><div class="num">8</div><div class="muted">Lessons</div></div>
+    <div class="card stat"><div class="icon">🧮</div><div class="num">3</div><div class="muted">Network Tools</div></div>
+    <div class="card stat"><div class="icon">📝</div><div class="num">10</div><div class="muted">Quiz Questions</div></div>
+    <div class="card stat"><div class="icon">📈</div><div class="num" id="progress">0%</div><div class="muted">Progress</div></div>
+  </div>
+  <div class="section card">
+    <h2>🚀 Start Learning</h2>
+    <p class="muted">Belajar networking dari asas sampai troubleshooting. Pilih topik untuk mula.</p>
+    <button class="btn" onclick="showPage('learn')">Open Lessons →</button>
+  </div>
+  <div class="section">
+    <h2>⭐ Recommended</h2>
+    <div class="lesson-grid" id="homeLessons"></div>
+  </div>
+</section>
+
+<section id="learn" class="page">
+  <div class="lesson-grid" id="lessonGrid"></div>
+</section>
+
+<section id="lessonView" class="page">
+  <div class="card lesson-view" id="lessonContent"></div>
+</section>
+
+<section id="tools" class="page">
+  <div class="card">
+    <h2>🧮 Subnet Calculator</h2>
+    <p class="muted">Masukkan IPv4 address dan CIDR prefix.</p>
+    <div class="calc">
+      <div>
+        <label>IPv4 Address</label>
+        <input id="ip" value="192.168.10.25" placeholder="192.168.10.25">
+        <label>CIDR Prefix</label>
+        <input id="cidr" type="number" min="0" max="32" value="24">
+        <button class="btn" onclick="calculateSubnet()">Calculate</button>
+      </div>
+      <div class="result" id="calcResult">Result akan muncul di sini.</div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="page">
+  <div class="card">
+    <div class="badge" id="quizCounter">Question 1 / 10</div>
+    <h2 id="question"></h2>
+    <div id="options"></div>
+    <p id="quizFeedback" class="muted"></p>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>Next →</button>
+  </div>
+</section>
+</main>
+</div>
+
+<div class="mobile"><nav>
+  <button class="active" data-page="home">🏠<br>Home</button>
+  <button data-page="learn">📚<br>Learn</button>
+  <button data-page="tools">🧮<br>Tools</button>
+  <button data-page="quiz">📝<br>Quiz</button>
+</nav></div>
+
+<script>
+const lessons=[
+ {id:"basics",icon:"🌐",title:"Networking Basics",desc:"Asas network, LAN, WAN, bandwidth dan latency.",body:`<h2>🌐 Networking Basics</h2><p>Computer networking ialah proses menghubungkan peranti supaya boleh berkomunikasi dan berkongsi sumber.</p><h3>LAN vs WAN</h3><ul><li><b>LAN</b> — rangkaian kawasan kecil seperti pejabat.</li><li><b>WAN</b> — menghubungkan rangkaian di kawasan yang jauh.</li></ul><h3>Istilah penting</h3><ul><li><b>Bandwidth</b> — kapasiti penghantaran data.</li><li><b>Latency</b> — masa kelewatan penghantaran.</li><li><b>Packet</b> — unit data yang dihantar melalui network.</li></ul>`},
+ {id:"osi",icon:"🧩",title:"OSI Model",desc:"Kenali 7 layer OSI dan fungsi setiap layer.",body:`<h2>🧩 OSI Model</h2><p>OSI mempunyai 7 layer:</p><ol><li>Physical</li><li>Data Link</li><li>Network</li><li>Transport</li><li>Session</li><li>Presentation</li><li>Application</li></ol><p>Tip mudah: <b>Please Do Not Throw Sausage Pizza Away</b>.</p>`},
+ {id:"ip",icon:"📍",title:"IP Address",desc:"IPv4, subnet mask, gateway dan private IP.",body:`<h2>📍 IP Address</h2><p>IPv4 mempunyai 32-bit dan biasanya ditulis sebagai empat octet, contoh <b>192.168.1.10</b>.</p><h3>Private IPv4</h3><ul><li>10.0.0.0/8</li><li>172.16.0.0/12</li><li>192.168.0.0/16</li></ul><p>Default gateway biasanya ialah router yang digunakan host untuk keluar ke network lain.</p>`},
+ {id:"subnet",icon:"🧮",title:"Subnetting",desc:"CIDR, subnet mask, network dan broadcast address.",body:`<h2>🧮 Subnetting</h2><p>Subnetting membahagikan satu network kepada beberapa subnet yang lebih kecil.</p><div class="code">/24 = 255.255.255.0\n/25 = 255.255.255.128\n/26 = 255.255.255.192\n/27 = 255.255.255.224</div><p>Semakin besar prefix, semakin kecil jumlah host dalam setiap subnet.</p>`},
+ {id:"vlan",icon:"🔀",title:"VLAN & Switching",desc:"Access port, trunk port dan VLAN segmentation.",body:`<h2>🔀 VLAN & Switching</h2><p>VLAN membolehkan satu physical switch dibahagikan kepada beberapa logical network.</p><h3>Access vs Trunk</h3><ul><li><b>Access</b> — biasanya membawa satu VLAN untuk endpoint.</li><li><b>Trunk</b> — membawa multiple VLAN antara network devices.</li></ul><div class="code">interface GigabitEthernet1/0/10\n switchport mode access\n switchport access vlan 10</div>`},
+ {id:"routing",icon:"🛣️",title:"Routing",desc:"Bagaimana router menentukan laluan packet.",body:`<h2>🛣️ Routing</h2><p>Router menggunakan routing table untuk menentukan next hop atau interface bagi destination network.</p><h3>Contoh</h3><div class="code">Network: 192.168.20.0/24\nNext-hop: 192.168.10.1</div><p>Routing boleh menggunakan static route atau dynamic routing protocol.</p>`},
+ {id:"wifi",icon:"📡",title:"Wi-Fi",desc:"SSID, channels, 2.4 GHz, 5 GHz dan basic troubleshooting.",body:`<h2>📡 Wi-Fi</h2><p>Wi-Fi menggunakan radio frequency untuk komunikasi tanpa kabel.</p><ul><li><b>2.4 GHz</b> — coverage lebih jauh tetapi lebih mudah terganggu.</li><li><b>5 GHz</b> — biasanya lebih laju tetapi coverage lebih pendek.</li><li><b>SSID</b> — nama wireless network.</li></ul>`},
+ {id:"trouble",icon:"🔧",title:"Troubleshooting",desc:"Kaedah sistematik untuk cari punca masalah network.",body:`<h2>🔧 Network Troubleshooting</h2><p>Mulakan dari layer paling asas.</p><ol><li>Check power dan link light.</li><li>Check cable.</li><li>Check IP configuration.</li><li>Ping gateway.</li><li>Ping destination.</li><li>Check DNS.</li><li>Check switch port / VLAN.</li></ol><div class="code">ipconfig /all\nping 192.168.1.1\ntracert 8.8.8.8\nnslookup example.com</div>`}
+];
+
+const questions=[
+["Apakah layer OSI yang bertanggungjawab terhadap routing?","Network",["Physical","Data Link","Network","Application"]],
+["Apakah contoh private IPv4?","192.168.1.10",["8.8.8.8","192.168.1.10","1.1.1.1","172.0.0.1"]],
+["Apakah fungsi VLAN?","Logical network segmentation",["Increase cable length","Logical network segmentation","Replace router","Encrypt Wi-Fi"]],
+["/24 bersamaan subnet mask apa?","255.255.255.0",["255.255.0.0","255.255.255.0","255.255.255.128","255.255.255.252"]],
+["Apakah fungsi default gateway?","Laluan keluar ke network lain",["Memberi nama PC","Laluan keluar ke network lain","Menukar MAC address","Menjana Wi-Fi"]],
+["Port trunk biasanya membawa apa?","Multiple VLANs",["Satu VLAN sahaja","Multiple VLANs","IP address sahaja","DNS sahaja"]],
+["Command Windows untuk melihat konfigurasi IP?","ipconfig",["ifconfig","ipconfig","routeprint","netstat -r"]],
+["Apakah SSID?","Nama wireless network",["IP router","Nama wireless network","MAC switch","Subnet mask"]],
+["Apakah alat paling asas untuk menguji reachability?","ping",["mkdir","ping","format","taskkill"]],
+["Apakah maksud latency?","Kelewatan penghantaran data",["Kapasiti disk","Kelewatan penghantaran data","Jumlah VLAN","Kelajuan CPU"]]
+];
+
+let quizIndex=0,score=0,answered=false;
+
+function showPage(id){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ const titles={home:"Dashboard",learn:"Lessons",tools:"Network Tools",quiz:"Quiz",lessonView:"Lesson"};
+ document.getElementById("pageTitle").textContent=titles[id]||"Network Academy";
+ document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ if(id==="quiz") renderQuiz();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+
+function lessonCard(l){
+ return `<div class="card lesson"><div style="font-size:28px">${l.icon}</div><span class="badge">LESSON</span><h3>${l.title}</h3><p>${l.desc}</p><br><button class="btn secondary" onclick="openLesson('${l.id}')">Learn →</button></div>`;
+}
+function renderLessons(list=lessons){
+ document.getElementById("lessonGrid").innerHTML=list.map(lessonCard).join("");
+ document.getElementById("homeLessons").innerHTML=lessons.slice(0,3).map(lessonCard).join("");
+}
+function openLesson(id){
+ const l=lessons.find(x=>x.id===id);
+ document.getElementById("lessonContent").innerHTML=l.body+`<br><button class="btn secondary" onclick="showPage('learn')">← Back to Lessons</button>`;
+ showPage("lessonView");
+ localStorage.setItem("lastLesson",id);
+ updateProgress();
+}
+function searchLessons(q){
+ const term=q.toLowerCase().trim();
+ if(!term){renderLessons();return}
+ showPage("learn");
+ renderLessons(lessons.filter(l=>(l.title+" "+l.desc).toLowerCase().includes(term)));
+}
+function updateProgress(){
+ const n=localStorage.getItem("completedLessons")||0;
+ document.getElementById("progress").textContent=Math.min(100,Math.round(n/lessons.length*100))+"%";
+}
+function calculateSubnet(){
+ const ip=document.getElementById("ip").value.trim(), prefix=Number(document.getElementById("cidr").value);
+ const parts=ip.split(".").map(Number);
+ if(parts.length!==4||parts.some(x=>!Number.isInteger(x)||x<0||x>255)||prefix<0||prefix>32){
+  document.getElementById("calcResult").innerHTML="<b>Invalid IPv4 / CIDR.</b>";return;
+ }
+ let ipNum=parts.reduce((a,x)=>((a<<8)>>>0)+x,0)>>>0;
+ const mask=prefix===0?0:(0xffffffff<<(32-prefix))>>>0;
+ const network=(ipNum&mask)>>>0, broadcast=(network|(~mask>>>0))>>>0;
+ const toIp=n=>[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join(".");
+ const hosts=prefix>=31?(prefix===31?2:1):2**(32-prefix)-2;
+ document.getElementById("calcResult").innerHTML=
+ `<b>Network:</b> ${toIp(network)}<br><b>Broadcast:</b> ${toIp(broadcast)}<br>
+ <b>Subnet Mask:</b> ${toIp(mask)}<br><b>Usable Hosts:</b> ${hosts}<br>
+ <b>First Host:</b> ${prefix>=31?"N/A":toIp((network+1)>>>0)}<br>
+ <b>Last Host:</b> ${prefix>=31?"N/A":toIp((broadcast-1)>>>0)}`;
+}
+function renderQuiz(){
+ const q=questions[quizIndex];
+ document.getElementById("quizCounter").textContent=`Question ${quizIndex+1} / ${questions.length}`;
+ document.getElementById("question").textContent=q[0];
+ document.getElementById("quizFeedback").textContent="";
+ document.getElementById("nextBtn").disabled=true;
+ answered=false;
+ document.getElementById("options").innerHTML=q[2].map(o=>`<button class="quiz-option" onclick="answerQuiz(this,'${o.replace(/'/g,"\\'")}')">${o}</button>`).join("");
+}
+function answerQuiz(btn,choice){
+ if(answered)return; answered=true;
+ const correct=questions[quizIndex][1];
+ document.querySelectorAll(".quiz-option").forEach(b=>{if(b.textContent===correct)b.classList.add("correct")});
+ if(choice===correct){btn.classList.add("correct");score++;document.getElementById("quizFeedback").textContent="✅ Betul!";}
+ else {btn.classList.add("wrong");document.getElementById("quizFeedback").textContent="❌ Salah. Jawapan: "+correct;}
+ document.getElementById("nextBtn").disabled=false;
+}
+function nextQuestion(){
+ quizIndex++;
+ if(quizIndex>=questions.length){
+  document.getElementById("question").textContent=`🎉 Quiz selesai — ${score}/${questions.length}`;
+  document.getElementById("options").innerHTML="";
+  document.getElementById("quizFeedback").textContent=score>=8?"Excellent networking!":"Good start. Cuba lagi untuk improve score.";
+  document.getElementById("nextBtn").textContent="Restart";
+  document.getElementById("nextBtn").onclick=()=>{quizIndex=0;score=0;document.getElementById("nextBtn").textContent="Next →";document.getElementById("nextBtn").onclick=nextQuestion;renderQuiz()};
+ }else renderQuiz();
+}
+renderLessons();updateProgress();
+</script>
+</body>
+</html>
