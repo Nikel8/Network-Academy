@@ -1,10 +1,12 @@
 {
   "name":"Network Academy",
   "short_name":"Net Academy",
-  "start_url":".",
+  "start_url":"./",
   "display":"standalone",
-  "background_color":"#061222",
+  "background_color":"#040c17",
   "theme_color":"#071426",
-  "description":"Network Academy - interactive networking learning app",
-  "icons":[{"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "description":"Free interactive networking learning lab",
+  "icons":[
+    {"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
 }
